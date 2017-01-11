@@ -4,17 +4,16 @@
   <p>Use this service to PDFs for the <a href="http://sl.dais-ita.org/science-library">DAIS Science Library</a>.</p>
 
   <form>
-
     <div class="form-group">
       <label for="origin">Origin</label>
-      <input type="text" class="form-control" id="origin" placeholder="URL">
+      <input type="text" class="form-control" id="origin" placeholder="URL to PDF" ng-model="origin">
     </div>
 
     <div class="form-group">
       <label for="origin">Destination</label>
-      <input type="text" class="form-control" id="destination" placeholder="URL">
+      <input type="text" class="form-control" id="destination" placeholder="Resulting PDF name, if left blank defaults to page.pdf" ng-model="destination">
     </div>
 
-    <button type="submit" class="btn btn-default">Generate</button>
+    <button type="submit" class="btn btn-default" ng-disabled="!origin" ng-click="generate()">Generate</button>
   </form>
 </div>

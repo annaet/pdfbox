@@ -25,10 +25,10 @@ var getPage = function (req, res) {
 
   console.log(req.body);
 
-  if (req.body.url && Number.isInteger(req.body.page)) {
+  if (req.body.origin && Number.isInteger(req.body.page)) {
     var location = 'paper.pdf';
 
-    download(req.body.url, location, function(err) {
+    download(req.body.origin, location, function(err) {
       if (err) {
         return console.log(err);
       }
