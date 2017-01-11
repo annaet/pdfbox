@@ -23,9 +23,8 @@ var download = function(url, dest, cb) {
 var getPage = function (req, res) {
   'use strict';
 
-  console.log(req.body);
-
-  if (req.body.origin && Number.isInteger(req.body.page)) {
+  if (req.body.origin) {
+    console.log(req.body);
     var location = 'paper.pdf';
 
     download(req.body.origin, location, function(err) {
@@ -33,14 +32,19 @@ var getPage = function (req, res) {
         return console.log(err);
       }
 
+      var pageNum = req.body.page;
+      if (!Number.isInteger(req.body.page)) {
+        pageNum = 0;
+      }
+
       var document = Document.loadSync(location);
-      var page = document.getPageSync(req.body.page);
+      var page = document.getPageSync(pageNum);
 
       var destination = req.body.destination;
       if (!destination) {
         destination = 'page.pdf';
       }
-      var newDocument = page.extractSync(destination);
+      page.extractSync(destination);
 
       res.send('done');
     });

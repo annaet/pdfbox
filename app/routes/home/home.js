@@ -5,12 +5,15 @@ angular.module('myApp')
 
   $scope.generate = function() {
     var options = {
-      origin: $scope.origin,
-      page: 0
+      origin: $scope.origin
     };
 
     if ($scope.destination) {
       options.destination = $scope.destination;
+    }
+
+    if ($scope.page) {
+      options.page = 0;
     }
 
     $http.post('pdf/page', options).then(function(response) {
