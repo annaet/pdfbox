@@ -44,9 +44,17 @@ var getPage = function (req, res) {
 
       var pdfImage = new PDFImage(destination);
       pdfImage.convertPage(pageNum).then(function (imagePath) {
-        res.download(imagePath);
+        res.download(imagePath, function(err) {
+          if (err) {
+            console.log(err);
+          }
+
+          fs.unlink(destination);
+          fs.unlink(imagePath);
+        });
       }, function (err) {
-        res.send(err, 500);
+        console.log(err);
+        res.status(500).send(err);
       });
 
       // var document = Document.loadSync(destination);
