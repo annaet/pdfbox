@@ -1,6 +1,7 @@
 var https = require('https');
 var fs = require('fs');
 var Document = require('node-pdfbox');
+var PDFImage = require("pdf-image").PDFImage;
 
 var download = function(url, dest, cb) {
   'use strict';
@@ -24,29 +25,38 @@ var getPage = function (req, res) {
   'use strict';
 
   if (req.body.origin) {
-    console.log(req.body);
-    var location = 'paper.pdf';
+    var destination = req.body.destination;
+    if (!destination) {
+      destination = 'page.pdf';
+    }
 
-    download(req.body.origin, location, function(err) {
+    download(req.body.origin, destination, function(err) {
       if (err) {
         return console.log(err);
       }
 
       var pageNum = req.body.page;
-      if (!Number.isInteger(req.body.page)) {
+      pageNum = parseInt(pageNum, 10);
+
+      if (!Number.isInteger(pageNum)) {
         pageNum = 0;
       }
 
-      var document = Document.loadSync(location);
-      var page = document.getPageSync(pageNum);
+      var pdfImage = new PDFImage(destination);
+      pdfImage.convertPage(pageNum).then(function (imagePath) {
+        res.download(imagePath);
+      }, function (err) {
+        res.send(err, 500);
+      });
 
-      var destination = req.body.destination;
-      if (!destination) {
-        destination = 'page.pdf';
-      }
-      page.extractSync(destination);
+      // var document = Document.loadSync(destination);
+      // var page = document.getPageSync(pageNum);
+      // console.log(document.pagesCountSync());
+      // page.extractSync(destination);
 
-      res.send('done');
+      // var filePath = '/../../' + destination;
+      // res.download(__dirname + filePath);
+
     });
   } else {
     console.log('missing body');
