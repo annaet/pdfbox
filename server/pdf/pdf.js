@@ -61,19 +61,26 @@ var getPage = function (req, res) {
           return console.log('error: child process exited with code ' + code);
         }
 
-        res.download(imageName, function(err) {
+        fs.access(imageName, function(err) {
           if (err) {
-            console.log(err);
+            console.log('error: image has not been created correctly');
+            return res.sendStatus(500);
           }
 
-          fs.unlink(paperPath);
-          fs.unlink(imageName);
+          res.download(imageName, function(err) {
+            if (err) {
+              console.log(err);
+            }
+
+            fs.unlink(paperPath);
+            fs.unlink(imageName);
+          });
         });
       });
 
     });
   } else {
-    console.log('missing body');
+    console.log('error: missing body');
   }
 };
 
