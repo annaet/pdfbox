@@ -1,3 +1,95 @@
-html, body {
+html, body, .pdfbox-container {
   height: 100%;
+}
+
+h1 {
+  font-size: 150px;
+}
+
+a {
+  color: #7dc2d8;
+  text-decoration: none;
+  border-bottom: 1px solid;
+}
+
+label {
+  color: #7c93a5;
+}
+
+.pdfbox-container {
+  background: #3c5161;
+  color: #efefef;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.description {
+  margin-left: 8px;
+}
+
+.form {
+  margin: 60px 8px 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  background-color: #efefef;
+}
+
+.options {
+  display: flex;
+}
+
+.url {
+  flex-grow: 2;
+}
+
+.page-num-group {
+  margin-left: 15px;
+}
+
+.page-num {
+  width: 90px;
+}
+
+.btn-generate {
+  width: 40%;
+  margin: 0 30%;
+  height: 80px;
+  color: #3c5161;
+  font-size: 24px;
+  background: #7c93a5;
+  border: none;
+  text-shadow: none;
+}
+
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus {
+  color: #333;
+  background-color: #536d82;
+  border-color: #adadad;
+}
+
+.btn-default[disabled],
+.btn-default[disabled]:hover,
+.btn-default[disabled]:focus {
+  background-color: #5a7286;
+  border: none;
+  text-shadow: none;
+}
+
+.debug {
+  height: 220px;
+  background: #2e4352;
+  border-radius: 5px;
+  margin: 0 8px;
+  padding: 15px 20px;
+  font-family: monospace;
 }

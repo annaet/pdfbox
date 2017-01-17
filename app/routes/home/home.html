@@ -1,26 +1,27 @@
 <div class="container">
-  <h1>PDFBox</h1>
+  <div>
+    <h1>PDFBox</h1>
 
-  <p>Use this service to convert PDFs to single page images for the <a href="http://sl.dais-ita.org/science-library">DAIS Science Library</a>.</p>
+    <p class="description">Convert a PDF to single page images for the <a href="http://sl.dais-ita.org/science-library">DAIS Science Library</a>.</p>
+  </div>
 
-  <form>
-    <div class="form-group">
-      <label for="origin">PDF URL</label>
-      <input type="text" class="form-control" id="origin" placeholder="eg. https://dais-ita.org/sites/default/files/IST148-paper-final.pdf" ng-model="origin">
+  <form class="form">
+    <div class="options">
+      <div class="form-group url">
+        <label for="origin">PDF URL</label>
+        <input type="text" class="form-control" id="origin" placeholder="eg. https://dais-ita.org/sites/default/files/IST148-paper-final.pdf" ng-model="origin">
+      </div>
+
+      <div class="form-group page-num-group">
+        <label for="page">Page number</label>
+        <input type="text" class="form-control page-num" id="page" placeholder="1" ng-model="page">
+      </div>
     </div>
 
-<!--
-    <div class="form-group">
-      <label for="origin">Destination</label>
-      <input type="text" class="form-control" id="destination" placeholder="Resulting PDF name, if left blank defaults to page.pdf" ng-model="destination">
-    </div>
--->
-
-    <div class="form-group">
-      <label for="page">Page number</label>
-      <input type="text" class="form-control" id="page" placeholder="Defaults to 1 (first page)" ng-model="page">
-    </div>
-
-    <button type="submit" class="btn btn-default" ng-disabled="!origin" ng-click="generate()">Generate</button>
+    <button type="submit" class="btn btn-default btn-generate" ng-disabled="!origin" ng-click="generate()">Generate</button>
   </form>
+
+  <div class="debug">
+    <p ng-repeat="log in debug">{{log}}</p>
+  </div>
 </div>
