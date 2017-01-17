@@ -26,9 +26,11 @@ angular.module('myApp')
       var blob = new Blob([response.data], {type : 'application/pdf'});
       var url = (window.URL || window.webkitURL).createObjectURL(blob);
 
+      var pageNum = $scope.pageNum || 1;
+
       var a = document.createElement('a');
       a.href = url;
-      a.download = $scope.destination || 'page.jpg';
+      a.download = $scope.destination || 'page-' + pageNum + '.jpg';
       a.target = '_blank';
       a.click();
 

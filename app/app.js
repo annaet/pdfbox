@@ -12,11 +12,11 @@ angular.module('myApp', [
 
   $stateProvider
     .state('home', {
-      url: '/home',
+      url: '/',
       templateUrl: 'routes/home/home.html',
       controller: 'HomeCtrl'
     });
 
   $urlRouterProvider
-    .otherwise('/home');
+    .otherwise('/');
 });
