@@ -22,6 +22,6 @@
   </form>
 
   <div class="debug">
-    <p ng-repeat="log in debug">{{log}}</p>
+    <p ng-repeat="log in debug track by $index">{{log}}</p>
   </div>
 </div>

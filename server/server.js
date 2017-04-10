@@ -4,7 +4,7 @@ var path = require('path');
 var app = express();
 var server = require('http').Server(app);
 
-app.use(express.static(path.join(__dirname, '../app')));
+app.use('/', express.static(path.join(__dirname, '../app')));
 
 require('./routes')(app);
 
@@ -19,5 +19,5 @@ var appEnv = cfenv.getAppEnv();
 server.listen(appEnv.port, function() {
   'use strict';
 
-  console.log("server starting on " + appEnv.url);
+  console.log('server starting on ' + appEnv.url);
 });
