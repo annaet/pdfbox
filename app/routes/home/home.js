@@ -36,7 +36,12 @@ angular.module('myApp')
 
       var a = document.createElement('a');
       a.href = url;
-      a.download = $scope.destination || 'page-' + pageNum + '.jpg';
+
+      var startIndex = options.origin.lastIndexOf('/');
+      var endIndex = options.origin.lastIndexOf('.');
+      var paperName = options.origin.slice(startIndex + 1, endIndex);
+
+      a.download = paperName + '-page-' + pageNum + '.jpg';
       a.target = '_blank';
       a.click();
     });
